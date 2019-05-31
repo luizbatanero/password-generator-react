@@ -1,5 +1,6 @@
 import React from 'react';
 import { Slider } from 'react-semantic-ui-range';
+import { Button, Segment } from 'semantic-ui-react';
 
 class Settings extends React.Component {
   state = {
@@ -41,7 +42,7 @@ class Settings extends React.Component {
     }
 
     return (
-      <div>
+      <Segment stacked>
         <div>
           length:
           <input type="text" name="length" value={this.state.length} readOnly />
@@ -51,7 +52,7 @@ class Settings extends React.Component {
             settings={{
               start: this.state.length,
               min: 3,
-              max: 32,
+              max: 24,
               step: 1,
               onChange: value => this.setState({ length: value })
             }}
@@ -117,10 +118,16 @@ class Settings extends React.Component {
             style={{ inner: { margin: 0 } }}
           />
         </div>
-        <button onClick={() => this.props.handleGenerate(this.state)}>
+        <Button
+          loading={this.props.isLoading}
+          color="teal"
+          fluid
+          size="large"
+          onClick={() => this.props.handleGenerate(this.state)}
+        >
           Generate
-        </button>
-      </div>
+        </Button>
+      </Segment>
     );
   }
 }
