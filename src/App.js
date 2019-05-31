@@ -23,7 +23,9 @@ class App extends React.Component {
 
   render() {
     return (
-      <div style={{ background: '#f9fbfd', minHeight: '100vh' }}>
+      <div
+        style={{ background: '#f9fbfd', height: '100vh', overflowY: 'scroll' }}
+      >
         <Grid container centered className="App">
           <Grid.Column style={{ maxWidth: 450, padding: '70px 0' }}>
             <Header as="h2" textAlign="center">
