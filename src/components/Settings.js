@@ -74,8 +74,8 @@ class Settings extends React.PureComponent {
             }}
             style={{ inner: { margin: 0 } }}
           />
-          <Label color="teal" size="large" style={{ margin: 0 }}>
-            length
+          <Label color="teal" size="large" style={{ margin: '3px 0 0' }}>
+            password length
             <Label.Detail>{length}</Label.Detail>
           </Label>
         </div>
@@ -127,8 +127,8 @@ class Settings extends React.PureComponent {
             }}
             style={{ inner: { margin: 0 } }}
           />
-          <Label color="teal" size="large" style={{ margin: 0 }}>
-            amount
+          <Label color="teal" size="large" style={{ margin: '3px 0 0' }}>
+            number of passwords
             <Label.Detail>{amount}</Label.Detail>
           </Label>
         </div>
