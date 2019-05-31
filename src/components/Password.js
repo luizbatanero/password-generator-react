@@ -7,9 +7,9 @@ const strengthColors = ['red', 'orange', 'yellow', 'olive', 'teal'];
 
 function charColor(char) {
   if (char.match(/\d/)) {
-    return 'blue';
+    return 'teal';
   } else if (char.match(/[^a-zA-Z0-9]/)) {
-    return 'red';
+    return 'brown';
   } else {
     return 'black';
   }
