@@ -3,7 +3,6 @@ import Settings from './components/Settings';
 import PasswordList from './components/PasswordList';
 import { generatePasswords } from './utility/password-generator';
 import { Grid, Header } from 'semantic-ui-react';
-import './App.css';
 
 class App extends React.Component {
   state = {
@@ -24,18 +23,20 @@ class App extends React.Component {
 
   render() {
     return (
-      <Grid container centered className="App">
-        <Grid.Column style={{ maxWidth: 450, padding: '70px 0' }}>
-          <Header as="h2" textAlign="center">
-            Password Generator
-          </Header>
-          <Settings
-            handleGenerate={this.handleGenerate}
-            isLoading={this.state.isLoading}
-          />
-          <PasswordList passwords={this.state.passwords} />
-        </Grid.Column>
-      </Grid>
+      <div style={{ background: '#f9fbfd', minHeight: '100vh' }}>
+        <Grid container centered className="App">
+          <Grid.Column style={{ maxWidth: 450, padding: '70px 0' }}>
+            <Header as="h2" textAlign="center">
+              Password Generator
+            </Header>
+            <Settings
+              handleGenerate={this.handleGenerate}
+              isLoading={this.state.isLoading}
+            />
+            <PasswordList passwords={this.state.passwords} />
+          </Grid.Column>
+        </Grid>
+      </div>
     );
   }
 }
