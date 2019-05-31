@@ -17,7 +17,7 @@ class App extends React.Component {
           passwords: generatePasswords(settings),
           isLoading: false
         });
-      }, 500);
+      }, 300);
     });
   };
 
@@ -29,11 +29,11 @@ class App extends React.Component {
             <Header as="h2" textAlign="center">
               Password Generator
             </Header>
-            <Settings
-              handleGenerate={this.handleGenerate}
+            <Settings handleGenerate={this.handleGenerate} />
+            <PasswordList
+              passwords={this.state.passwords}
               isLoading={this.state.isLoading}
             />
-            <PasswordList passwords={this.state.passwords} />
           </Grid.Column>
         </Grid>
       </div>

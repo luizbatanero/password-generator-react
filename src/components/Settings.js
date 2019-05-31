@@ -1,8 +1,8 @@
 import React from 'react';
 import { Slider } from 'react-semantic-ui-range';
-import { Button, Segment } from 'semantic-ui-react';
+import { Segment } from 'semantic-ui-react';
 
-class Settings extends React.Component {
+class Settings extends React.PureComponent {
   state = {
     length: 14,
     lowerCase: true,
@@ -24,6 +24,14 @@ class Settings extends React.Component {
       });
     }
   };
+
+  componentDidMount() {
+    this.props.handleGenerate(this.state);
+  }
+
+  componentDidUpdate() {
+    this.props.handleGenerate(this.state);
+  }
 
   render() {
     const {
@@ -118,15 +126,6 @@ class Settings extends React.Component {
             style={{ inner: { margin: 0 } }}
           />
         </div>
-        <Button
-          loading={this.props.isLoading}
-          color="teal"
-          fluid
-          size="large"
-          onClick={() => this.props.handleGenerate(this.state)}
-        >
-          Generate
-        </Button>
       </Segment>
     );
   }
