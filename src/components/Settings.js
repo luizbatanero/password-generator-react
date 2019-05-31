@@ -1,6 +1,13 @@
 import React from 'react';
 import { Slider } from 'react-semantic-ui-range';
-import { Segment } from 'semantic-ui-react';
+import {
+  Segment,
+  Button,
+  Icon,
+  Form,
+  Label,
+  Checkbox
+} from 'semantic-ui-react';
 
 class Settings extends React.PureComponent {
   state = {
@@ -18,11 +25,12 @@ class Settings extends React.PureComponent {
       target.name === 'allowedSymbols' && target.value.match(/[a-zA-Z0-9\s]/);
 
     if (!invalidSymbol) {
-      this.setState({
-        [target.name]:
-          target.type === 'checkbox' ? target.checked : target.value
-      });
+      this.setState({ [target.name]: target.value });
     }
+  };
+
+  handleCheckbox = (e, { name, checked }) => {
+    this.setState({ [name]: checked });
   };
 
   componentDidMount() {
@@ -39,7 +47,9 @@ class Settings extends React.PureComponent {
       allowedSymbols,
       lowerCase,
       upperCase,
-      numbers
+      numbers,
+      length,
+      amount
     } = this.state;
 
     if (symbols && !allowedSymbols.length) {
@@ -51,14 +61,12 @@ class Settings extends React.PureComponent {
 
     return (
       <Segment stacked>
-        <div>
-          length:
-          <input type="text" name="length" value={this.state.length} readOnly />
+        <div style={{ marginBottom: 10 }}>
           <Slider
-            value={this.state.length}
+            value={length}
             color="teal"
             settings={{
-              start: this.state.length,
+              start: length,
               min: 3,
               max: 24,
               step: 1,
@@ -66,58 +74,52 @@ class Settings extends React.PureComponent {
             }}
             style={{ inner: { margin: 0 } }}
           />
+          <Label color="teal" size="large" style={{ margin: 0 }}>
+            length
+            <Label.Detail>{length}</Label.Detail>
+          </Label>
         </div>
-        <div>
-          <input
-            type="checkbox"
-            name="lowerCase"
-            checked={this.state.lowerCase}
-            onChange={this.handleChange}
-          />
-          lower case letters
-        </div>
-        <div>
-          <input
-            type="checkbox"
-            name="upperCase"
-            checked={this.state.upperCase}
-            onChange={this.handleChange}
-          />
-          upper case letters
-        </div>
-        <div>
-          <input
-            type="checkbox"
-            name="numbers"
-            checked={this.state.numbers}
-            onChange={this.handleChange}
-          />
-          numbers
-        </div>
-        <div>
-          <input
-            type="checkbox"
-            name="symbols"
-            checked={this.state.symbols}
-            onChange={this.handleChange}
-            disabled={!this.state.allowedSymbols.length}
-          />
-          symbols:
-          <input
-            type="text"
-            name="allowedSymbols"
-            value={this.state.allowedSymbols}
-            onChange={this.handleChange}
-          />
-        </div>
-        <div>
-          amount:
-          <input type="text" name="amount" value={this.state.amount} readOnly />
+        <Form.Checkbox
+          label="lower case letters"
+          name="lowerCase"
+          checked={this.state.lowerCase}
+          onChange={this.handleCheckbox}
+          style={{ marginBottom: 5 }}
+        />
+        <Form.Checkbox
+          label="upper case letters"
+          name="upperCase"
+          checked={this.state.upperCase}
+          onChange={this.handleCheckbox}
+          style={{ marginBottom: 5 }}
+        />
+        <Form.Checkbox
+          label="numbers"
+          name="numbers"
+          checked={this.state.numbers}
+          onChange={this.handleCheckbox}
+          style={{ marginBottom: 5 }}
+        />
+        <Form.Input
+          label={
+            <Checkbox
+              label=""
+              name="symbols"
+              checked={this.state.symbols}
+              onChange={this.handleCheckbox}
+              disabled={!this.state.allowedSymbols.length}
+            />
+          }
+          name="allowedSymbols"
+          value={this.state.allowedSymbols}
+          onChange={this.handleChange}
+        />
+        <div style={{ margin: '10px 0' }}>
           <Slider
-            value={this.state.amount}
+            value={amount}
             color="teal"
             settings={{
-              start: this.state.amount,
+              start: amount,
               min: 1,
               max: 20,
               step: 1,
@@ -125,7 +127,19 @@ class Settings extends React.PureComponent {
             }}
             style={{ inner: { margin: 0 } }}
           />
+          <Label color="teal" size="large" style={{ margin: 0 }}>
+            amount
+            <Label.Detail>{amount}</Label.Detail>
+          </Label>
         </div>
+        <Button
+          fluid
+          basic
+          icon
+          onClick={() => this.props.handleGenerate(this.state)}
+        >
+          <Icon name="refresh" />
+        </Button>
       </Segment>
     );
   }
