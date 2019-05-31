@@ -1,47 +1,61 @@
 import React, { useState } from 'react';
-import { Button, Popup } from 'semantic-ui-react';
+import { Card, Button, Popup, Progress } from 'semantic-ui-react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import zxcvbn from 'zxcvbn';
 
+const strengthColors = ['red', 'orange', 'yellow', 'olive', 'teal'];
+
+function charColor(char) {
+  if (char.match(/\d/)) {
+    return 'blue';
+  } else if (char.match(/[^a-zA-Z0-9]/)) {
+    return 'red';
+  } else {
+    return 'black';
+  }
+}
+
 const Password = ({ password }) => {
   const [copied, setCopied] = useState(false);
+  const passwordStrength = zxcvbn(password).score;
+
   return (
-    <div style={{ display: 'block', margin: '5px 0', fontFamily: 'monospace' }}>
-      {password.split('').map((char, index) => {
-        if (char.match(/\d/)) {
-          return (
-            <span style={{ color: 'blue' }} key={index}>
-              {char}
-            </span>
-          );
-        } else if (char.match(/[^a-zA-Z0-9]/)) {
-          return (
-            <span style={{ color: 'red' }} key={index}>
-              {char}
-            </span>
-          );
-        }
-        return (
-          <span className={''} key={index}>
+    <Card fluid>
+      <Card.Content style={{ display: 'flex', alignItems: 'center' }}>
+        {password.split('').map((char, index) => (
+          <span
+            style={{ color: charColor(char), fontFamily: 'monospace' }}
+            key={index}
+          >
             {char}
           </span>
-        );
-      })}{' '}
-      <small>
-        [strength:{zxcvbn(password).score}]{' '}
+        ))}
         <Popup
           inverted
           size="tiny"
+          position="right center"
           content={copied ? 'Copied!' : 'Copy to clipboard'}
           trigger={
             <CopyToClipboard text={password} onCopy={() => setCopied(true)}>
-              <Button icon="copy outline" color="teal" />
+              <Button
+                basic
+                icon="copy outline"
+                style={{ marginLeft: 'auto' }}
+              />
             </CopyToClipboard>
           }
           onClose={() => setCopied(false)}
         />
-      </small>
-    </div>
+      </Card.Content>
+      <Card.Content style={{ padding: 0 }}>
+        <Progress
+          percent={((passwordStrength + 1) / 5) * 100}
+          size="tiny"
+          style={{ margin: 0, borderRadius: 0 }}
+          color={strengthColors[passwordStrength]}
+        />
+      </Card.Content>
+    </Card>
   );
 };
 
