@@ -1,4 +1,4 @@
-# Password Generator React
+# Password Generator
 :lock: Password generator built with React and SemanticUI
 
 ### [Live Demo](https://password-generator-react.netlify.com/)
