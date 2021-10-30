@@ -15,8 +15,8 @@ const PasswordList = ({ passwords, isLoading }) => {
   }
   return (
     <div>
-      {passwords.map((password, index) => (
-        <Password password={password} key={index} />
+      {passwords.map((password) => (
+        <Password password={password} key={password} />
       ))}
     </div>
   );
