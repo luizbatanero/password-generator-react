@@ -64,7 +64,7 @@ class Settings extends React.PureComponent {
         <div style={{ marginBottom: 10 }}>
           <Slider
             value={length}
-            color="teal"
+            color="grey"
             settings={{
               start: length,
               min: 3,
@@ -74,7 +74,7 @@ class Settings extends React.PureComponent {
             }}
             style={{ inner: { margin: 0 } }}
           />
-          <Label color="teal" size="large" style={{ margin: '3px 0 0' }}>
+          <Label color="grey" size="large" style={{ margin: '3px 0 0' }}>
             password length
             <Label.Detail>{length}</Label.Detail>
           </Label>
@@ -117,7 +117,7 @@ class Settings extends React.PureComponent {
         <div style={{ margin: '10px 0' }}>
           <Slider
             value={amount}
-            color="teal"
+            color="grey"
             settings={{
               start: amount,
               min: 1,
@@ -127,7 +127,7 @@ class Settings extends React.PureComponent {
             }}
             style={{ inner: { margin: 0 } }}
           />
-          <Label color="teal" size="large" style={{ margin: '3px 0 0' }}>
+          <Label color="grey" size="large" style={{ margin: '3px 0 0' }}>
             number of passwords
             <Label.Detail>{amount}</Label.Detail>
           </Label>
